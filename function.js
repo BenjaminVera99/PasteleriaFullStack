@@ -1,57 +1,95 @@
-const nombres = document.getElementById("nombres");
+// Validacion de formulario de iniciar sesion
+const emailSesion = document.querySelector("#IniciarSesion #email");
+const passwordSesion = document.querySelector("#IniciarSesion #password");
+const errorSesion = document.getElementById("errorSesion");
+const formSesion = document.getElementById("IniciarSesion");
+
+
+formSesion.addEventListener('submit', function (e) {
+    let hayError = false;
+
+    if (!emailSesion.value.includes("@")) {
+        emailSesion.classList.add("error");
+        errorSesion.innerHTML = "Error, el correo no es válido.";
+        hayError = true;
+    } else {
+        emailSesion.classList.remove("error");
+    }
+
+    
+    if (passwordSesion.value.length < 1) {
+        passwordSesion.classList.add("error");
+        errorSesion.innerHTML = "Error, la contraseña no puede estar vacía.";
+        hayError = true;
+    } else {
+        passwordSesion.classList.remove("error");
+    }
+
+    if (hayError) {
+        e.preventDefault(); 
+    } else {
+        errorSesion.innerHTML = "&nbsp;";
+    }
+});
+
+
+
+// Validacion de formulario de registro 
+const nombresRegistro = document.getElementById("nombresRegistro");
 const errorRegistro = document.querySelector("#errorRegistro");
-const email = document.querySelector("#email");
-const password1 = document.querySelector("#password1");
-const password2 = document.querySelector("#password2");
+const emailRegistro = document.querySelector("#emailRegistro");
+const passwordRegistro1 = document.querySelector("#passwordRegistro1");
+const passwordRegistro2 = document.querySelector("#passwordRegistro2");
 const formRegistro = document.querySelector("#Registrarse");
 
-nombres.addEventListener('keyup', function (e) {
-    if (nombres.value.length < 3) {
-        nombres.classList.add("error");
+// formulario registro
+nombresRegistro.addEventListener('keyup', function (e) {
+    if (nombresRegistro.value.length < 3) {
+        nombresRegistro.classList.add("error");
         errorRegistro.innerHTML = "Error, ingrese al menos 3 caracteres!.";
     } else {
-        nombres.classList.remove("error");
+        nombresRegistro.classList.remove("error");
         errorRegistro.innerHTML = "&nbsp;";
     }
 })
 
-email.addEventListener('keyup', function (e) {
-    if (!email.value.includes("@")) {
-        email.classList.add("error");
+emailRegistro.addEventListener('keyup', function (e) {
+    if (!emailRegistro.value.includes("@")) {
+        emailRegistro.classList.add("error");
         errorRegistro.innerHTML = "Error, Debes un incluir un signo arroba @ !.";
     } else {
-        email.classList.remove("error");
+        emailRegistro.classList.remove("error");
         errorRegistro.innerHTML = "&nbsp;";
     }
 })
 
-password1.addEventListener('keyup', (e) => password())
-password2.addEventListener('keyup', (e) => password())
+passwordRegistro1.addEventListener('keyup', (e) => password())
+passwordRegistro2.addEventListener('keyup', (e) => password())
 
 function password() {
-    if (password2.value != password1.value) {
-        password2.classList.add("error");
+    if (passwordRegistro2.value != passwordRegistro1.value) {
+        passwordRegistro2.classList.add("error");
         errorRegistro.innerHTML = "Error, las contraseñas no coinciden!.";
     } else {
-        password2.classList.remove("error");
+        passwordRegistro2.classList.remove("error");
         errorRegistro.innerHTML = "&nbsp;";
     }
 }
 
 formRegistro.addEventListener('submit', function (e) {
-    if (nombres.value.length < 3) {
-        nombres.classList.add("error");
+    if (nombresRegistro.value.length < 3) {
+        nombresRegistro.classList.add("error");
     }
-    if (!email.value.includes("@")) {
-        email.classList.add("error");
+    if (!emailRegistro.value.includes("@")) {
+        emailRegistro.classList.add("error");
     }
-    if (password2.value != password1.value || password1.value == "") {
-        password2.classList.add("error");
+    if (passwordRegistro2.value != passwordRegistro1.value || passwordRegistro1.value == "") {
+        passwordRegistro2.classList.add("error");
     }
     document.querySelectorAll("input").forEach(el=>{
         if(el.classList.contains("error")){
             e.preventDefault()
-            errorRegistro.innerHTML = "Error, revisa los campos en rojo!.";
+            errorRegistro.innerHTML = "Error, revisa los campos en rojo!!!";
             return;
         }
     })
