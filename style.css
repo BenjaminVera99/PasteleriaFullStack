@@ -6,15 +6,12 @@
   background-color: #FFF5E1;  
 }
 
-
-
 #bannerArriba {
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
   
 }
-
 
 #bannerArriba{
     display: flex;
